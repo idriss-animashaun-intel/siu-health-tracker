@@ -1,0 +1,59 @@
+Open("C:\Scripts\SIU_tracker\TIU.jmp")
+<< New Column( "Result", Character, Nominal, Formula( :TEST_RESULT || Char( :TEST_RESULT_NUMERIC ) ) );
+
+
+dt0 = Data Table( "output" ) <<
+Split(
+	Split By( :TEST_NAME ),
+	Split( :Result ),
+	Group( :SORT_LOT, :SORT_WAFER_ID, :SORT_X_LOCATION, :SORT_Y_LOCATION ),
+	Remaining Columns( Drop All ),
+	Sort by Column Property
+);
+
+dt0:Total Good << Data type( Numeric ) << Set Modeling Type( Continuous );
+dt0:Total Bad << Data type( Numeric ) << Set Modeling Type( Continuous );
+
+//dt0 = Data Table( "output" );
+//dt0 << text to columns( delimiter( "." ), columns( :LOTS End Date Time ) );
+
+dt0 << New Column( "LOTS End Date Time 1",
+  Numeric,
+  Continuous,
+  Format( "yyyy-mm-dd", 10, 0 ),
+  Input Format( "yyyy-mm-dd", 0 ),
+  Formula(
+   Parse Date(
+    Substr( :LOTS End Date Time, 1, 10 )
+   )
+  )
+);
+
+
+dt0 << New Column( "Total_Die", Numeric, Continuous, Formula( (:Name( "Total Good") + (:Name( "Total Bad")))));
+
+column(dt0,"LOTS End Date Time 1")<<Format( "yyyy-mm-dd");
+
+dt = dt0 << Summary(
+	Group(
+		:SORT_LOT,
+		:Unit TIU,
+		:LOTS End Date Time 1,
+		:Total_Die
+	),
+	Subgroup( :INTERFACE_BIN ),
+	Freq( "None" ),
+	Weight( "None" )
+);
+
+
+dt << New Column( "% b15", Numeric, Continuous, Formula( (:Name( "N(15)" ) / :Total_die) * 100));
+dt << New Column( "% b19", Numeric, Continuous, Formula( (:Name( "N(19)" ) / :Total_die) * 100));
+dt << New Column( "% b54", Numeric, Continuous, Formula( (:Name( "N(54)" ) / :Total_die) * 100));
+
+
+Overlay Plot(
+	X( :LOTS End Date Time 1 ),
+	Y( :Name( "% b15" ), :Name( "% b19" ), :Name( "% b54" ) ),
+	by(:Unit TIU)
+);
