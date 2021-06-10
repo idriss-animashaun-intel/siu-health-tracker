@@ -12,8 +12,6 @@ dt0 = Data Table( "output" ) <<
 Split(
 	Split By( :TEST_NAME ),
 	Split( :Result ),
-	Group( :SORT_LOT, :SORT_WAFER_ID, :SORT_X_LOCATION, :SORT_Y_LOCATION ),
-	Remaining Columns( Drop All ),
 	Sort by Column Property
 );
 
