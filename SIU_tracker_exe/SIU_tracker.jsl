@@ -52,6 +52,15 @@ Weight( "None" )
 
 dt << Set Name("Summary of Bins");
 
+col_name_list = dt << get column names(string);
+new_column = {"N(15)", "N(19)", "N(54)"};
+
+for( i = 1, i <= NItems( new_column ), i++,
+if (!contains(col_name_list, new_column[i]),
+dt << new column(new_column[i], set each value(0));
+);
+);
+
 dt << New Column( "% bin 15", Numeric, Continuous, Formula( (:Name( "N(15)" ) / :Total_die) * 100));
 dt << New Column( "% bin 19", Numeric, Continuous, Formula( (:Name( "N(19)" ) / :Total_die) * 100));
 dt << New Column( "% bin 54", Numeric, Continuous, Formula( (:Name( "N(54)" ) / :Total_die) * 100));
