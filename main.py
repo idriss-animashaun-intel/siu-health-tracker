@@ -3,7 +3,7 @@ from tkinter import ttk
 import os
 from subprocess import call
 import json
-import sys
+from pathlib import Path
 
 dir = os.path.join("outputs")
 if not os.path.exists(dir):
@@ -11,8 +11,8 @@ if not os.path.exists(dir):
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
-    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
-    return os.path.join(base_path, relative_path)
+    path = Path(__file__).parent / relative_path
+    return str(path)
 
 
 
