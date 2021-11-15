@@ -3,7 +3,7 @@ from tkinter import ttk
 import os
 from subprocess import call
 import json
-from pathlib import Path
+import sys
 
 dir = os.path.join("outputs")
 if not os.path.exists(dir):
@@ -11,8 +11,8 @@ if not os.path.exists(dir):
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
-    path = Path(__file__).parent / relative_path
-    return str(path)
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
 
 
@@ -86,7 +86,9 @@ def run_aqua():
     elif variable.get() == "ADL601":
         product = "601_SIU_TRACKER"        
     elif variable.get() == "ADL881":
-        product = "881_SIU_TRACKER"        
+        product = "881_SIU_TRACKER"
+    elif variable.get() == "RPL8161":
+        product = "8161_SIU_TRACKER"     
     else:
         product = "SIU_TRACKER"
         
@@ -109,7 +111,7 @@ def run_aqua():
 
 ### Main Root
 root = Tk()
-root.title('SIU Health Tracker v1.12')
+root.title('SIU Health Tracker [ADL/RPL] v1.2')
 icon = resource_path("icon.ico")
 root.iconbitmap(icon)
 
@@ -134,7 +136,7 @@ label_1.grid(row = 1, sticky=E)
 variable = StringVar(mainframe)
 variable.set("ALL") # default value
 
-sel_prod = OptionMenu(mainframe, variable, "ALL", "ADL282", "ADL682", "ADL601", "ADL881")
+sel_prod = OptionMenu(mainframe, variable, "ALL", "ADL282", "ADL682", "ADL601", "ADL881", "RPL8161")
 sel_prod.grid(row = 1, column = 1, sticky=W)
 
 
@@ -165,6 +167,3 @@ text_box.insert("end-1c", "Error Messages Will Appear Here :")
 
 ### Main loop
 root.mainloop()
-
-
-
