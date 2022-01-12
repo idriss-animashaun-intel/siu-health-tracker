@@ -132,47 +132,47 @@ link1 = Label(mainframe, text="Wiki: https://goto/siutracker", fg="blue", cursor
 link1.grid(row = 0,column = 0, sticky=W)
 link1.bind("<Button-1>", lambda e: callback("https://goto/siutracker"))
 
-link2 = Label(mainframe, text="Support: idriss.animashaun@intel.com", fg="blue", cursor="hand2")
+link2 = Label(mainframe, text="IT support: Contact Idriss Animashaun, idriss.animashaun@intel.com", fg="blue", cursor="hand2")
 link2.grid(row = 1,column = 0, sticky=W)
 link2.bind("<Button-1>", lambda e: callback("https://outlook.com"))
 
 label_0 = Label(mainframe, text = 'Enter No. of Days to Check: ', bg  ='black', fg = 'white')
-label_0.grid(row = 1, sticky=E)
+label_0.grid(row = 3, sticky=E)
 days = Entry(mainframe, width=10, relief = FLAT)
 days.insert(4,7)
-days.grid(row = 1, column = 1, sticky=W)
+days.grid(row = 3, column = 1, sticky=W)
 
 label_1 = Label(mainframe, text = 'Select Product: ', bg  ='black', fg = 'white')
-label_1.grid(row = 2, sticky=E)
+label_1.grid(row = 4, sticky=E)
 variable = StringVar(mainframe)
 variable.set("ALL") # default value
 
 sel_prod = OptionMenu(mainframe, variable, "ALL", "ADL282", "ADL682", "ADL601", "ADL881", "RPL8161", "ADL081")
-sel_prod.grid(row = 2, column = 1, sticky=W)
+sel_prod.grid(row = 4, column = 1, sticky=W)
 
 
 
 
 label_3 = Label(mainframe, text = 'Enter Test Program: ', bg  ='black', fg = 'white')
-label_3.grid(row = 6, sticky=E)
+label_3.grid(row = 8, sticky=E)
 TP = Entry(mainframe, width=20, relief = FLAT)
 TP.insert(4,"optional")
-TP.grid(row = 6, column = 1)
+TP.grid(row = 8, column = 1)
 
 label_4 = Label(mainframe, text = 'Enter Eng ID: ', bg  ='black', fg = 'white')
-label_4.grid(row = 7, sticky=E)
+label_4.grid(row = 9, sticky=E)
 engid = Entry(mainframe, width=20, relief = FLAT)
 engid.insert(4,"optional")
-engid.grid(row = 7, column = 1)
+engid.grid(row = 9, column = 1)
 
 
 
 
 button_0 = Button(mainframe, text="Pull Data", height = 1, width = 20, command = run_aqua, borderwidth = 4, bg = 'green', fg = 'white', font = '-family "SF Espresso Shack" -size 12')
-button_0.grid(row = 9, column = 0, rowspan = 2 )
+button_0.grid(row = 11, column = 0, rowspan = 2 )
 
 text_box = Text(mainframe, width = 50, height = 4)
-text_box.grid(row = 8, column = 0, columnspan = 1, pady=20)
+text_box.grid(row = 10, column = 0, columnspan = 1, pady=20)
 
 text_box.insert("end-1c", "Error Messages Will Appear Here :")
 
