@@ -3,3 +3,6 @@ __pycache__
 pyinstaller_siu_health_tracker.txt
 PIC.pptx
 outputs
+build
+dist
+*.spec
