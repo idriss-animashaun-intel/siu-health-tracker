@@ -1,2 +1,3 @@
 __pycache__
 *.vs
+pyinstaller_siu_health_tracker.txt
