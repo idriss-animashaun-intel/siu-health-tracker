@@ -130,7 +130,7 @@ def callback(url):
 
 link1 = Label(mainframe, text="Wiki: https://goto/siutracker", fg="blue", cursor="hand2")
 link1.grid(row = 0,column = 0, sticky=W)
-link1.bind("<Button-1>", lambda e: callback("https://goto/siutracker"))
+link1.bind("<Button-1>", lambda e: callback("https://gitlab.devtools.intel.com/ianimash/SIU_HEALTH_TRACKER/-/wikis/SIU-HEALTH-TRACKER"))
 
 link2 = Label(mainframe, text="IT support: Contact Idriss Animashaun, idriss.animashaun@intel.com", fg="blue", cursor="hand2")
 link2.grid(row = 1,column = 0, sticky=W)
