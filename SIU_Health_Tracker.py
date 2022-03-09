@@ -63,7 +63,8 @@ def main(autoinstall=0):
     try:
         Popen(siu_tracker_file)
         print("*** Opening SIU Health Tracker ***")
-        time.sleep(20)
+        if autoinstall:
+            time.sleep(20)
     except:
         print('Failed to open application, Please open manually in subfolder')
         pass
