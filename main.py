@@ -88,7 +88,9 @@ def run_aqua():
     elif variable.get() == "RPL8161":
         product = "8161_SIU_TRACKER" 
     elif variable.get() == "ADL081":
-        product = "081_SIU_TRACKER"     
+        product = "081_SIU_TRACKER"
+    elif variable.get() == "RPL682":
+        product = "RPL682_SIU_TRACKER"     
     else:
         product = "SIU_TRACKER"
         
@@ -147,7 +149,7 @@ label_1.grid(row = 4, sticky=E)
 variable = StringVar(mainframe)
 variable.set("ALL") # default value
 
-sel_prod = OptionMenu(mainframe, variable, "ALL", "ADL282", "ADL682", "ADL601", "ADL881", "RPL8161", "ADL081")
+sel_prod = OptionMenu(mainframe, variable, "ALL", "ADL282", "ADL682", "ADL601", "ADL881", "RPL8161", "ADL081", "RPL682")
 sel_prod.grid(row = 4, column = 1, sticky=W)
 
 
