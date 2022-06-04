@@ -7,14 +7,18 @@ from subprocess import Popen
 from subprocess import call
 
 siu_tracker_master_directory = os.getcwd()
-siu_tracker_directory = siu_tracker_master_directory+"\SIU_HEALTH_TRACKER-updates"
+siu_tracker_directory = siu_tracker_master_directory+"\siu-health-tracker-updates"
 siu_tracker_file = siu_tracker_directory+"\\main.exe"
 siu_tracker_old_directory = siu_tracker_master_directory+"\\old_revisions"
 siu_tracker_old_file = siu_tracker_old_directory+"\\main.exe"
 
+proxy_handler = urllib.request.ProxyHandler({'https': 'http://proxy-dmz.intel.com:912'})
+opener = urllib.request.build_opener(proxy_handler)
+urllib.request.install_opener(opener)
+
 def installation():
     print("*** Downloading new version ***")
-    urllib.request.urlretrieve("https://gitlab.devtools.intel.com/ianimash/SIU_HEALTH_TRACKER/-/archive/updates/SIU_HEALTH_TRACKER-updates.zip", siu_tracker_master_directory+"\\siu_tracker_new.zip")
+    urllib.request.urlretrieve("https://github.com/idriss-animashaun-intel/siu-health-tracker/archive/refs/heads/updates.zip", siu_tracker_master_directory+"\\siu_tracker_new.zip")
     print("*** Extracting new version ***")
     zip_ref = zipfile.ZipFile(siu_tracker_master_directory+"\siu_tracker_new.zip", 'r')
     zip_ref.extractall(siu_tracker_master_directory)
@@ -32,12 +36,12 @@ def main(autoinstall=0):
     ### Is siu_tracker already installed? If yes get file size to compare for upgrade
     if os.path.isfile(siu_tracker_file):
         local_file_size = int(os.path.getsize(siu_tracker_file))
-        # print(local_file_size)
+        print(local_file_size)
         ### Check if update needed:
-        f = urllib.request.urlopen("https://gitlab.devtools.intel.com/ianimash/SIU_HEALTH_TRACKER/raw/updates/main.exe") # points to the exe file for size
+        f = urllib.request.urlopen("https://github.com/idriss-animashaun-intel/siu-health-tracker/raw/updates/main.exe") # points to the exe file for size
         i = f.info()
         web_file_size = int(i["Content-Length"])
-        # print(web_file_size)
+        print(web_file_size)
         if local_file_size != web_file_size:# upgrade available
             if autoinstall:
                 print("*** New upgrade available! Upgrading now *** ")
