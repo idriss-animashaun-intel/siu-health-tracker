@@ -57,7 +57,6 @@ if os.path.isfile(siu_tracker_file):
 
 ### siu_tracker wasn't installed, so we download and install it here                
 else:
-    print('not in repo')
     installation()
 
 if os.path.isdir(Old_siu_tracker_directory):
